@@ -125,7 +125,7 @@ curl http://localhost:9090
 
 ### Website Accessible in Browser
 
-![Website Live](screenshots/website-live.png)
+![Website Live](screenshots/website_live.png)
 
 ---
 
