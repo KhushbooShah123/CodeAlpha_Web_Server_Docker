@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    build: .
+    image: khushbooshah20/codealpha-webserver:latest
     container_name: codealpha-webserver
     ports:
       - "9090:80"
