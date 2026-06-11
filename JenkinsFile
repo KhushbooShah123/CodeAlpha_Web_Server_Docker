@@ -1,0 +1,60 @@
+@Library("Shared") _
+pipeline {
+    agent {
+        label 'Arjun'
+    }
+
+    stages {
+        stage("Hello"){
+            steps{
+                script{
+                    hello()
+                }
+            }
+        }
+
+        stage('Code') {
+            steps {
+                script{
+                clone('https://github.com/KhushbooShah123/CodeAlpha_Web_Server_Docker.git' , "main")
+            }
+                
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building Docker Image'
+                script{
+                    docker_build("codealpha-webserver" ,  "latest" , "khushbooshah20")
+                }
+                sh 'docker build -t codealpha-webserver .'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing Application'
+            }
+        }
+
+        stage('Push') {
+            steps {
+                echo 'Pushing Image to Docker Hub'
+            script{
+                docker_push("codealpha-webserver" , "latest")
+            }
+                
+            }
+        }
+
+       stage('Deploy') {
+    steps {
+        echo 'Deploying with Docker Compose'
+        script{
+            docker_compose()
+        }
+    }
+}
+}
+}
